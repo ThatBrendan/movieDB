@@ -3,6 +3,7 @@ package com.example.brendancode.demo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @SpringBootApplication
@@ -20,6 +21,8 @@ public class SakilaDbApplication {
 	@Autowired
 	private FilmRepository filmRepository;
 
+	private String save = "save";
+
 	public SakilaDbApplication(LanguageRepository languageRepository,
 							   ActorRepository actorRepository,
 							   FilmRepository filmRepository){
@@ -32,19 +35,27 @@ public class SakilaDbApplication {
 		SpringApplication.run(SakilaDbApplication.class, args);
 	}
 
-	@GetMapping("/AllLanguages")
+	@PostMapping("/newLanguages")
+	public @ResponseBody
+	String addLanguage(@RequestParam String name){
+		Language addLanguage = new Language(name);
+		languageRepository.save(addLanguage);
+		return save;
+	}
+
+	@GetMapping("/Languages")
 	public @ResponseBody
 	Iterable<Language> getAllLanguages(){
 		return languageRepository.findAll();
 	}
 
-	@GetMapping("/AllActors")
+	@GetMapping("/Actors")
 	public @ResponseBody
 	Iterable<Actor> getAllActors(){
 		return actorRepository.findAll();
 	}
 
-	@GetMapping("/AllFilms")
+	@GetMapping("/Films")
 	public @ResponseBody
 	Iterable<Film> getAllFilms(){
 		return filmRepository.findAll();

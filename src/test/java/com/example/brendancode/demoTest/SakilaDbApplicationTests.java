@@ -1,4 +1,4 @@
-package com.example.brendancode.demo;
+package com.example.brendancode.demoTest;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
