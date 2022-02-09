@@ -21,14 +21,19 @@ public class SakilaDbApplication {
 	@Autowired
 	private FilmRepository filmRepository;
 
+	@Autowired
+	private CategoryRepository categoryRepository;
+
 	private String save = "save";
 
 	public SakilaDbApplication(LanguageRepository languageRepository,
 							   ActorRepository actorRepository,
-							   FilmRepository filmRepository){
+							   FilmRepository filmRepository,
+							   CategoryRepository categoryRepository){
 		this.languageRepository = languageRepository;
 		this.actorRepository = actorRepository;
 		this.filmRepository = filmRepository;
+		this.categoryRepository = categoryRepository;
 	}
 
 	public static void main(String[] args) {
@@ -59,5 +64,11 @@ public class SakilaDbApplication {
 	public @ResponseBody
 	Iterable<Film> getAllFilms(){
 		return filmRepository.findAll();
+	}
+
+	@GetMapping("/Category")
+	public @ResponseBody
+	Iterable<Category> getAllCategory(){
+		return categoryRepository.findAll();
 	}
 }
