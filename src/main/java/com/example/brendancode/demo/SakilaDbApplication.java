@@ -48,6 +48,14 @@ public class SakilaDbApplication {
 		return save;
 	}
 
+	@PostMapping("/newCategory")
+	public @ResponseBody
+	String addCategory(@RequestParam String name){
+		Category addCategory = new Category(name);
+		categoryRepository.save(addCategory);
+		return save;
+	}
+
 	@GetMapping("/Languages")
 	public @ResponseBody
 	Iterable<Language> getAllLanguages(){
