@@ -14,8 +14,18 @@ public class SakilaDbApplication {
 	@Autowired
 	private LanguageRepository languageRepository;
 
-	public SakilaDbApplication(LanguageRepository languageRepository){
+	@Autowired
+	private ActorRepository actorRepository;
+
+	@Autowired
+	private FilmRepository filmRepository;
+
+	public SakilaDbApplication(LanguageRepository languageRepository,
+							   ActorRepository actorRepository,
+							   FilmRepository filmRepository){
 		this.languageRepository = languageRepository;
+		this.actorRepository = actorRepository;
+		this.filmRepository = filmRepository;
 	}
 
 	public static void main(String[] args) {
@@ -26,5 +36,17 @@ public class SakilaDbApplication {
 	public @ResponseBody
 	Iterable<Language> getAllLanguages(){
 		return languageRepository.findAll();
+	}
+
+	@GetMapping("/AllActors")
+	public @ResponseBody
+	Iterable<Actor> getAllActors(){
+		return actorRepository.findAll();
+	}
+
+	@GetMapping("/AllFilms")
+	public @ResponseBody
+	Iterable<Film> getAllFilms(){
+		return filmRepository.findAll();
 	}
 }
