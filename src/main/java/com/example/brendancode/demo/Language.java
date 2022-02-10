@@ -28,10 +28,6 @@ public class Language {
         return language_id;
     }
 
-    public void setLanguage_id(int newID) {
-        this.language_id = newID;
-    }
-
     public String getName() {
         return name;
     }

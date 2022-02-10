@@ -4,13 +4,12 @@ package com.example.brendancode.demo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "actor")
-public class Actor implements Serializable {
+public class Actor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int actor_id;
@@ -19,7 +18,7 @@ public class Actor implements Serializable {
 
     @ManyToMany(mappedBy = "actor", fetch = FetchType.LAZY)
     @JsonIgnore
-    private Set<Film> films = new HashSet<>();
+    private Set<Film> film = new HashSet<>();
 
     public Actor(String first_name, String last_name){
         this.first_name = first_name;
@@ -27,7 +26,14 @@ public class Actor implements Serializable {
     }
 
     public Actor(){
+    }
 
+    public Set<Film> getFilm() {
+        return film;
+    }
+
+    public void setFilm(Set<Film> film) {
+        this.film = film;
     }
 
     public int getActor_id() {

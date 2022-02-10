@@ -2,31 +2,19 @@ package com.example.brendancode.demo;
 
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "film")
-public class Film implements Serializable {
+public class Film {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int film_id;
     private String title;
     private String rating;
     private int release_year;
+    private int language_id;
 
-
-
-    public Film(String title, int release_year, String rating){
-        this.title = title;
-        this.release_year = release_year;
-        this.rating = rating;
-    }
-
-    public Film(){
-
-    }
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinTable(name = "film_actor",
@@ -38,6 +26,25 @@ public class Film implements Serializable {
     })
 
     private Set<Actor> actor = new HashSet<>();
+
+    public Film(String title, int release_year, String rating, int language_id){
+        this.title = title;
+        this.release_year = release_year;
+        this.rating = rating;
+        this.language_id = language_id;
+    }
+
+    public Film(){
+    }
+
+    public Set<Actor> getActor() {
+        return actor;
+    }
+
+    public void setActor(Set<Actor> actor) {
+        this.actor = actor;
+    }
+
 
     public int getFilm_id() {
         return film_id;
@@ -65,5 +72,13 @@ public class Film implements Serializable {
 
     public void setRating(String rating) {
         this.rating = rating;
+    }
+
+    public int getLanguage_id() {
+        return language_id;
+    }
+
+    public void setLanguage_id(int language_id) {
+        this.language_id = language_id;
     }
 }
