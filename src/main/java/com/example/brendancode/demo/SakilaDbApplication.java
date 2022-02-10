@@ -130,12 +130,11 @@ public class SakilaDbApplication {
 		return filmRepository.findAll();
 	}
 
-	@GetMapping("/GetNewFilm/{film_id}")
+	@GetMapping("/GetFilm/{film_id}")
 	public @ResponseBody
 	Optional<Film> getFilmByID(@PathVariable int film_id){
 		return filmRepository.findById(film_id);
 	}
-
 
 	//*FILMS*//
 }
