@@ -36,26 +36,19 @@ public class SakilaDbApplication {
 		this.categoryRepository = categoryRepository;
 	}
 
-	public SakilaDbApplication(LanguageRepository languageRepository) {
-	}
+//	public SakilaDbApplication(LanguageRepository languageRepository) {
+//	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(SakilaDbApplication.class, args);
 	}
 
+	//*LANGUAGES*//
 	@PostMapping("/newLanguages")
 	public @ResponseBody
 	String addLanguage(@RequestParam String name){
 		Language addLanguage = new Language(name);
 		languageRepository.save(addLanguage);
-		return save;
-	}
-
-	@PostMapping("/newCategory")
-	public @ResponseBody
-	String addCategory(@RequestParam String name){
-		Category addCategory = new Category(name);
-		categoryRepository.save(addCategory);
 		return save;
 	}
 
@@ -65,16 +58,15 @@ public class SakilaDbApplication {
 		return languageRepository.findAll();
 	}
 
-	@GetMapping("/Actors")
-	public @ResponseBody
-	Iterable<Actor> getAllActors(){
-		return actorRepository.findAll();
-	}
+	//*LANGUAGES*//
 
-	@GetMapping("/Films")
+	//*CATEGORY*//
+	@PostMapping("/newCategory")
 	public @ResponseBody
-	Iterable<Film> getAllFilms(){
-		return filmRepository.findAll();
+	String addCategory(@RequestParam String name){
+		Category addCategory = new Category(name);
+		categoryRepository.save(addCategory);
+		return save;
 	}
 
 	@GetMapping("/Category")
@@ -82,4 +74,27 @@ public class SakilaDbApplication {
 	Iterable<Category> getAllCategory(){
 		return categoryRepository.findAll();
 	}
+
+	//*CATEGORY*//
+
+	//*ACTORS*//
+
+	@GetMapping("/Actors")
+	public @ResponseBody
+	Iterable<Actor> getAllActors(){
+		return actorRepository.findAll();
+	}
+
+	//*ACTORS*//
+
+
+	//*FILMS*//
+
+	@GetMapping("/Films")
+	public @ResponseBody
+	Iterable<Film> getAllFilms(){
+		return filmRepository.findAll();
+	}
+
+	//*FILMS*//
 }

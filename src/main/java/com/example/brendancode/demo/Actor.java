@@ -1,17 +1,25 @@
 package com.example.brendancode.demo;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
-public class Actor {
+@Table(name = "actor")
+public class Actor implements Serializable {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int actor_id;
     private String first_name;
     private String last_name;
+
+    @ManyToMany(mappedBy = "actor", fetch = FetchType.LAZY)
+    @JsonIgnore
+    private Set<Film> films = new HashSet<>();
 
     public Actor(String first_name, String last_name){
         this.first_name = first_name;
