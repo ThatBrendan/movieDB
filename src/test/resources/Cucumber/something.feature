@@ -1,6 +1,5 @@
 Feature: Is it Mandarin?
-  As a consumer
-  I want to check if a movie is in Mandarin
+  As a consumer, I want to check if a movie is in Mandarin
   So that i can understand the movie.
   Scenario: Language is not Mandarin
     Given I have selected a film
