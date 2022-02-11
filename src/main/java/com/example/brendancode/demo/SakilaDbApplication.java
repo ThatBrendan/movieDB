@@ -13,7 +13,6 @@ import java.util.Optional;
 @RequestMapping("/Home")
 public class SakilaDbApplication {
 
-
 	@Autowired
 	private LanguageRepository languageRepository;
 
@@ -49,6 +48,13 @@ public class SakilaDbApplication {
 		Language addLanguage = new Language(name);
 		languageRepository.save(addLanguage);
 		return save;
+	}
+
+	@DeleteMapping("/removeLanguage/{language_id}")
+	public @ResponseBody
+	String removeLanguageByID(@PathVariable int language_id) {
+		languageRepository.deleteById(language_id);
+		return "The language with ID " +language_id + " has been removed";
 	}
 
 	@GetMapping("/Languages")
