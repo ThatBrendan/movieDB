@@ -34,7 +34,10 @@ public class Film {
         this.language_id = language_id;
     }
 
-    public Film(){
+    public Film(String title, String release_year, String rating){
+    }
+
+    public Film(String title, int release_year, String rating) {
     }
 
     public Set<Actor> getActor() {

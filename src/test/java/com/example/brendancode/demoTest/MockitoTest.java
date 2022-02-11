@@ -39,4 +39,26 @@ public class MockitoTest {
         Assertions.assertEquals(expected, actual, "Data has been created in mock DB");
     }
 
+    @Test
+    public void testAddActor(){
+        Actor addActor = new Actor("First name", "Last name");
+        String expected = "save";
+        String actual = sakilaDbApplication.addActors(addActor.getFirst_name(), addActor.getLast_name());
+        ArgumentCaptor<Actor>actorArgumentCaptor = ArgumentCaptor.forClass(Actor.class);
+        verify(actorRepository).save(actorArgumentCaptor.capture());
+        actorArgumentCaptor.getValue();
+        Assertions.assertEquals(expected, actual,"Actor data has been created in mock DB");
+    }
+
+    @Test
+    public void testAddFilm(){
+        Film addFilm = new Film("Title", "Release year", "rating");
+        String expected = "save";
+        String actual = sakilaDbApplication.addNewFilm(addFilm.getTitle(), addFilm.getRelease_year(), addFilm.getRating());
+        ArgumentCaptor<Film>actorArgumentCaptor = ArgumentCaptor.forClass(Film.class);
+        verify(filmRepository).save(actorArgumentCaptor.capture());
+        actorArgumentCaptor.getValue();
+        Assertions.assertEquals(expected, actual,"Film data has been created in mock DB");
+    }
+
 }

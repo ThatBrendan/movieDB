@@ -8,11 +8,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class FilmTests {
 
-    private Film film = new Film();
+    private Film film = new Film("Title", "Release year", "rating");
 
     @Test
     void setNameTest(){
-    Film testName = new Film();
+    Film testName = new Film("Title", "Release year", "rating");
     testName.setRating("PG");
     assertEquals( "PG", testName.getRating(), "Incorrect movie rating has been selected");
 

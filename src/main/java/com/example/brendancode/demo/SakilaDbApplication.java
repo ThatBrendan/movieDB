@@ -3,7 +3,6 @@ package com.example.brendancode.demo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -50,12 +49,13 @@ public class SakilaDbApplication {
 		return save;
 	}
 
-	@DeleteMapping("/removeLanguage/{language_id}")
-	public @ResponseBody
-	String removeLanguageByID(@PathVariable int language_id) {
-		languageRepository.deleteById(language_id);
-		return "The language with ID " +language_id + " has been removed";
-	}
+//	@DeleteMapping("/removeLanguage")
+//	public @ResponseBody
+//	String removeLanguageByID(@PathVariable int language_id) {
+//
+//		languageRepository.deleteById(language_id);
+//		return "The language with ID " +language_id + " has been removed";
+//	}
 
 	@GetMapping("/Languages")
 	public @ResponseBody
@@ -70,6 +70,38 @@ public class SakilaDbApplication {
 	}
 
 	//*LANGUAGES*//
+
+	//*ACTORS*//
+
+	@PostMapping("/newActors")
+	public @ResponseBody
+	String addActors(@RequestParam String first_name, String last_name){
+		Actor addActors = new Actor(first_name, last_name);
+		actorRepository.save(addActors);
+		return save;
+	}
+
+//	@DeleteMapping("/removeActor")
+//	public @ResponseBody
+//	String removeActorByID(@PathVariable int actor_id) {
+//		actorRepository.deleteById(actor_id);
+//		return "The actor with ID " + actor_id + " has been removed";
+//	}
+
+	@GetMapping("/Actors")
+	public @ResponseBody
+	Iterable<Actor> getAllActors(){
+		return actorRepository.findAll();
+	}
+
+
+	@GetMapping("/GetActor/{actor_id}")
+	public @ResponseBody
+	Optional<Actor> getActorByID(@PathVariable int actor_id){
+		return actorRepository.findById(actor_id);
+	}
+
+	//*ACTORS*//
 
 	//*CATEGORY*//
 	@PostMapping("/newCategory")
@@ -94,38 +126,15 @@ public class SakilaDbApplication {
 
 	//*CATEGORY*//
 
-	//*ACTORS*//
 
-	@PostMapping("/newActors")
-	public @ResponseBody
-	String addActors(@RequestParam String first_name, String last_name){
-		Actor addActors = new Actor(first_name, last_name);
-		actorRepository.save(addActors);
-		return save;
-	}
-
-	@GetMapping("/Actors")
-	public @ResponseBody
-	Iterable<Actor> getAllActors(){
-		return actorRepository.findAll();
-	}
-
-
-	@GetMapping("/GetActor/{actor_id}")
-	public @ResponseBody
-	Optional<Actor> getActorByID(@PathVariable int actor_id){
-		return actorRepository.findById(actor_id);
-	}
-
-	//*ACTORS*//
 
 
 	//*FILMS*//
 
 	@PostMapping("/newFilms")
 	public @ResponseBody
-	String addNewFilm(@RequestParam String title, int release_year, String rating, int language_id){
-		Film addNewFilm = new Film(title, release_year, rating, language_id);
+	String addNewFilm(@RequestParam String title, int release_year, String rating){
+		Film addNewFilm = new Film(title, release_year, rating);
 		filmRepository.save(addNewFilm);
 		return save;
 	}
