@@ -43,7 +43,7 @@ public class SakilaDbApplication {
 		SpringApplication.run(SakilaDbApplication.class, args);
 	}
 
-	//*LANGUAGES*//
+	//*LANGUAGES MIGHT BE DELETED*//
 	@PostMapping("/newLanguages")
 	public @ResponseBody
 	String addLanguage(@RequestParam String name){
