@@ -4,7 +4,7 @@ import com.example.brendancode.demo.Language;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 public class LanguageTests {
@@ -18,8 +18,14 @@ public class LanguageTests {
     }
 
     @Test
-    public void test_getLanguage(){
-        language.setName("testname");
-        assertEquals("testname", language.getName(), "Does not display the right get Language");
+    public void testGetName(){
+        Language getNameTest = new Language("Test Language");
+        assertEquals("Test Language", getNameTest.getName(), "The test has failed");
+    }
+
+    @Test
+    public void test_constructor(){
+        Language language = new Language();
+        assertTrue(language instanceof Language, "This is an incorrect instance of Language");
     }
 }
