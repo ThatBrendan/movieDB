@@ -28,4 +28,10 @@ public class LanguageTests {
         Language language = new Language();
         assertTrue(language instanceof Language, "This is an incorrect instance of Language");
     }
+
+    @Test
+    public void testLanguageBy_id(){
+        assertEquals(0, language.getLanguage_id(), "This test has failed");
+    }
+
 }
