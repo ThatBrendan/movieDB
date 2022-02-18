@@ -34,6 +34,9 @@ public class Actor implements Serializable {
     public Actor(){
     }
 
+    public Actor(String testFirstName, String testLastName, int film_id) {
+    }
+
     public Set<Film> getFilm() {
         return film;
     }

@@ -8,7 +8,10 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Optional;
+
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class MockitoTest {
@@ -40,6 +43,15 @@ public class MockitoTest {
     }
 
     @Test
+    public void testGetLanguageBy_id(){
+        Language testLanguage = new Language("TestLanguage");
+        when(sakilaDbApplication.getLanguageByID(0)).thenReturn(Optional.of(testLanguage));
+        Assertions.assertEquals(Optional.of(testLanguage), sakilaDbApplication.getLanguageByID(0), "The Language ID test has failed");
+    }
+
+
+
+    @Test
     public void testAddActor(){
         Actor addActor = new Actor("First name", "Last name");
         String expected = "save";
@@ -51,6 +63,13 @@ public class MockitoTest {
     }
 
     @Test
+    public void testGetActorBy_id(){
+        Actor testActor = new Actor("TestFirstName", "TestLastName", 1);
+        when(sakilaDbApplication.getActorByID(0)).thenReturn(Optional.of(testActor));
+        Assertions.assertEquals(Optional.of(testActor), sakilaDbApplication.getActorByID(0), "The Actor ID test has failed");
+    }
+
+    @Test
     public void testAddFilm(){
         Film addFilm = new Film("Title", "Release year", "rating");
         String expected = "save";
@@ -59,6 +78,13 @@ public class MockitoTest {
         verify(filmRepository).save(actorArgumentCaptor.capture());
         actorArgumentCaptor.getValue();
         Assertions.assertEquals(expected, actual,"Film data has been created in mock DB");
+    }
+
+    @Test
+    public void testGetFilmBy_id(){
+        Film testFilm = new Film("TestFilm", 2000, "TestRating", 1);
+        when(sakilaDbApplication.getFilmByID(0)).thenReturn(Optional.of(testFilm));
+        Assertions.assertEquals(Optional.of(testFilm), sakilaDbApplication.getFilmByID(0), "The film ID test has failed");
     }
 
 }
