@@ -1,7 +1,6 @@
 package com.example.brendancode.demoTest;
 
 import com.example.brendancode.demo.Category;
-import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -13,7 +12,7 @@ public class CategoryTest {
     @Test
     public void testGetCategory(){
         category.setName("Games");
-        Assert.assertEquals("Should display Games category", category.getName(),"Games");
+        assertEquals("Games", category.getName(),"Should display Games category");
     }
 
     @Test

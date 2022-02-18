@@ -1,7 +1,6 @@
 package com.example.brendancode.demoTest;
 
 import com.example.brendancode.demo.Language;
-import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -21,6 +20,6 @@ public class LanguageTests {
     @Test
     public void test_getLanguage(){
         language.setName("testname");
-        Assert.assertEquals("testname", language.getName());
+        assertEquals("testname", language.getName(), "Does not display the right get Language");
     }
 }

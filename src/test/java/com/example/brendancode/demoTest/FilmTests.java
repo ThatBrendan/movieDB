@@ -2,7 +2,6 @@ package com.example.brendancode.demoTest;
 
 import com.example.brendancode.demo.Actor;
 import com.example.brendancode.demo.Film;
-import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;

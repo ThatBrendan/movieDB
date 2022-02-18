@@ -2,7 +2,6 @@ package com.example.brendancode.demoTest;
 
 import com.example.brendancode.demo.Actor;
 import com.example.brendancode.demo.Film;
-import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;
@@ -19,13 +18,13 @@ public class ActorTests {
     @Test
     public void testGetFirstName(){
         actor.setFirst_name("Alec");
-        Assert.assertEquals("Should display Alec", actor.getFirst_name(), "Alec");
+        assertEquals("Alec", actor.getFirst_name(), "Should display Alec");
     }
 
     @Test
     public void testGetLastName(){
         actor.setLast_name("Wayne");
-        Assert.assertEquals("Should display Wayne", actor.getLast_name(), "Wayne");
+        assertEquals("Wayne", actor.getLast_name(), " Should display Wayne");
     }
 
     @Test
