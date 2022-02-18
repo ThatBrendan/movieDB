@@ -34,7 +34,11 @@ public class Film {
         this.language_id = language_id;
     }
 
-    public Film(String title, String release_year, String rating){
+    public Film() {
+
+    }
+
+    public Film(String title, String release_year, String rating) {
     }
 
     public Film(String title, int release_year, String rating) {
@@ -47,7 +51,6 @@ public class Film {
     public void setActor(Set<Actor> actor) {
         this.actor = actor;
     }
-
 
     public int getFilm_id() {
         return film_id;
