@@ -49,8 +49,6 @@ public class MockitoTest {
         Assertions.assertEquals(Optional.of(testLanguage), sakilaDbApplication.getLanguageByID(0), "The Language ID test has failed");
     }
 
-
-
     @Test
     public void testAddActor(){
         Actor addActor = new Actor("First name", "Last name");
