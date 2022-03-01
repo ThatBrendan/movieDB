@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
+@CrossOrigin(origins = "*")
 @SpringBootApplication
 @RestController
 @RequestMapping("/Home")
@@ -23,6 +24,9 @@ public class SakilaDbApplication {
 
 	@Autowired
 	private CategoryRepository categoryRepository;
+
+	@Autowired
+	private UserReviewRepository userReviewRepository;
 
 	private String save = "save";
 
@@ -123,8 +127,8 @@ public class SakilaDbApplication {
 
 	@PostMapping("/newFilms")
 	public @ResponseBody
-	String addNewFilm(@RequestParam String title, int release_year, String rating){
-		Film addNewFilm = new Film(title, release_year, rating);
+	String addNewFilm(@RequestParam String title, int release_year, String rating, String description){
+		Film addNewFilm = new Film(title, release_year, rating, description);
 		filmRepository.save(addNewFilm);
 		return save;
 	}
@@ -142,4 +146,23 @@ public class SakilaDbApplication {
 	}
 
 	//*FILMS*//
+
+	//*USER REVIEWS*//
+
+	@GetMapping("/Reviews")
+	public @ResponseBody
+	Iterable<UserReview>getAllReviews(){
+		return userReviewRepository.findAll();
+	}
+
+
+	@PostMapping("/Add_Review")
+	public @ResponseBody
+	String addReview(@RequestParam int film_film_id,String user_review){
+		UserReview addReview = new UserReview(film_film_id,user_review);
+		userReviewRepository.save(addReview);
+		return save;
+	}
+
+	//*USER REVIEWS*//
 }

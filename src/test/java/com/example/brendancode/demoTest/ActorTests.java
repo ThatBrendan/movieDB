@@ -41,7 +41,7 @@ public class ActorTests {
 
     @Test
     public void test_getActorSet(){
-        testFilmSet.add(new Film("test title", 2012,"PG",1 ));
+        testFilmSet.add(new Film("test title", 2012,"PG",1, "test description" ));
         actor.setFilm(testFilmSet);
         assertEquals(testFilmSet, actor.getFilm(), "Get or Set film isnt working");
     }

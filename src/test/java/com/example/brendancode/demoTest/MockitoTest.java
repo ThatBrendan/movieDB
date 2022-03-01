@@ -8,6 +8,8 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Optional;
 
 import static org.mockito.Mockito.verify;
@@ -25,6 +27,9 @@ public class MockitoTest {
     private CategoryRepository categoryRepository;
     @Mock
     private ActorRepository actorRepository;
+    @Mock
+    private UserReviewRepository userReviewRepository;
+    private Object Film;
 
     @BeforeEach
     void Setup(){
@@ -71,18 +76,29 @@ public class MockitoTest {
     public void testAddFilm(){
         Film addFilm = new Film("Title", "Release year", "rating");
         String expected = "save";
-        String actual = sakilaDbApplication.addNewFilm(addFilm.getTitle(), addFilm.getRelease_year(), addFilm.getRating());
-        ArgumentCaptor<Film>actorArgumentCaptor = ArgumentCaptor.forClass(Film.class);
-        verify(filmRepository).save(actorArgumentCaptor.capture());
-        actorArgumentCaptor.getValue();
+        String actual = sakilaDbApplication.addNewFilm(addFilm.getTitle(), addFilm.getRelease_year(), addFilm.getRating(), addFilm.getDescription());
+        ArgumentCaptor<Film>filmArgumentCaptor = ArgumentCaptor.forClass(Film.class);
+        verify(filmRepository).save(filmArgumentCaptor.capture());
+        filmArgumentCaptor.getValue();
         Assertions.assertEquals(expected, actual,"Film data has been created in mock DB");
     }
 
     @Test
     public void testGetFilmBy_id(){
-        Film testFilm = new Film("TestFilm", 2000, "TestRating", 1);
+        Film testFilm = new Film("TestFilm", 2000, "TestRating", 1, "TestDescription");
         when(sakilaDbApplication.getFilmByID(0)).thenReturn(Optional.of(testFilm));
         Assertions.assertEquals(Optional.of(testFilm), sakilaDbApplication.getFilmByID(0), "The film ID test has failed");
+    }
+
+    @Test
+    public void testAddReview(){
+        UserReview addReview = new UserReview(1, "TestReview");
+        String expected = "save";
+        String actual = sakilaDbApplication.addReview(addReview.getFilm_film_id(), addReview.getUser_review());
+        ArgumentCaptor<UserReview>userReviewArgumentCaptor = ArgumentCaptor.forClass(UserReview.class);
+        verify(userReviewRepository).save(userReviewArgumentCaptor.capture());
+        userReviewArgumentCaptor.getValue();
+        Assertions.assertEquals(expected, actual,"UserReview data has been created in mock DB");
     }
 
 }

@@ -14,8 +14,9 @@ public class Film {
     private String rating;
     private int release_year;
     private int language_id;
+    private String description;
 
-
+    //Maping the many to many relationship between Film and Actor into Film.
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinTable(name = "film_actor",
         joinColumns = {
@@ -24,15 +25,36 @@ public class Film {
         inverseJoinColumns = {
             @JoinColumn(name = "actor_id", referencedColumnName = "actor_id", nullable = false, updatable = false)
     })
-
     private Set<Actor> actor = new HashSet<>();
 
-    public Film(String title, int release_year, String rating, int language_id){
+    //Maping the many to many relationship between Film and Category into Film.
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @JoinTable(name = "film_category",
+        joinColumns = {
+            @JoinColumn(name ="film_id", referencedColumnName = "film_id", nullable = false, updatable = false)
+        },
+            inverseJoinColumns = {
+            @JoinColumn(name = "category_id", referencedColumnName = "category_id", nullable = false, updatable = false)
+            })
+
+    //Needed to add OnetoMany connection to get userreview table
+    @OneToMany(mappedBy = "film", cascade = CascadeType.ALL)
+    private Set<UserReview> userReview = new HashSet<>();
+
+    private Set<Category> category = new HashSet<>();
+
+
+
+
+    public Film(String title, int release_year, String rating, int language_id, String description){
         this.title = title;
         this.release_year = release_year;
         this.rating = rating;
         this.language_id = language_id;
+        this.description = description;
     }
+
+
 
     public Film() {
 
@@ -42,6 +64,9 @@ public class Film {
     }
 
     public Film(String title, int release_year, String rating) {
+    }
+
+    public Film(String title, int release_year, String rating, String description) {
     }
 
     public Set<Actor> getActor() {
@@ -86,5 +111,29 @@ public class Film {
 
     public void setLanguage_id(int language_id) {
         this.language_id = language_id;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Set<Category> getCategory() {
+        return category;
+    }
+
+    public void setCategory(Set<Category> category) {
+        this.category = category;
+    }
+
+    public Set<UserReview> getUserReview() {
+        return userReview;
+    }
+
+    public void setUserReview(Set<UserReview> userReview) {
+        this.userReview = userReview;
     }
 }
