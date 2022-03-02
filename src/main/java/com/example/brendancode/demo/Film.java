@@ -17,7 +17,7 @@ public class Film {
     private int language_id;
     private String description;
 
-    //Maping the many to many relationship between Film and Actor into Film.
+    //Mapping the many-to-many relationship between Film and Actor into Film.
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinTable(name = "film_actor",
         joinColumns = {
@@ -28,7 +28,7 @@ public class Film {
     })
     private Set<Actor> actor = new HashSet<>();
 
-    //Maping the many to many relationship between Film and Category into Film.
+    //Mapping the many-to-many relationship between Film and Category into Film.
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinTable(name = "film_category",
         joinColumns = {
@@ -39,7 +39,7 @@ public class Film {
             })
     private Set<Category> category = new HashSet<>();
 
-//    //Needed to add OnetoMany connection to get userreview table
+//    //Needed to add One-to-Many connection to get userreview table
     @OneToMany(mappedBy = "film", cascade = CascadeType.ALL)
     private Set<UserReview> userReview = new HashSet<>();
 
