@@ -12,18 +12,18 @@ public class CategoryTest {
 
     @Test
     public void testGetCategory(){
-        category.setName("Games");
-        assertEquals("Games", category.getName(),"Should display Games category");
+        Category testName = new Category();
+        testName.setName("Games");
+        assertEquals("Games", testName.getName(),"Should display Games category");
     }
 
     @Test
     public void testCategoryBy_id(){
-        assertEquals(1, category.getCategory_id(), "This test has failed");
+        assertEquals(0, category.getCategory_id(), "This test has failed");
     }
 
     @Test
     public void test_constructor(){
-        Category category = new Category();
         assertTrue(category instanceof Category, "Not the right instance of Category");
     }
 }
