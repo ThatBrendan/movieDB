@@ -56,8 +56,6 @@ public class Film {
         this.description = description;
     }
 
-
-
     public Film() {
 
     }

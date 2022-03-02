@@ -10,6 +10,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 import static org.mockito.Mockito.verify;
@@ -106,6 +107,15 @@ public class MockitoTest {
         Category testCategory = new Category("TestCategory");
         when(sakilaDbApplication.getCategoryByID(1)).thenReturn(Optional.of(testCategory));
         Assertions.assertEquals(Optional.of(testCategory), sakilaDbApplication.getCategoryByID(1), "The category ID test has failed");
+    }
+
+    @Test
+    public void testGetCategory(){
+        Category testCategory = new Category("Name");
+        List<Category> categoryList = new ArrayList<>();
+        categoryList.add(testCategory);
+        when(sakilaDbApplication.getAllCategory()).thenReturn(categoryList);
+        Assertions.assertEquals(categoryList, sakilaDbApplication.getAllCategory(), "This category failed");
     }
 
 }
