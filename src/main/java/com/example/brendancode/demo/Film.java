@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@Table(name = "film")
 public class Film {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,12 +37,13 @@ public class Film {
             inverseJoinColumns = {
             @JoinColumn(name = "category_id", referencedColumnName = "category_id", nullable = false, updatable = false)
             })
+    private Set<Category> category = new HashSet<>();
 
-    //Needed to add OnetoMany connection to get userreview table
+//    //Needed to add OnetoMany connection to get userreview table
     @OneToMany(mappedBy = "film", cascade = CascadeType.ALL)
     private Set<UserReview> userReview = new HashSet<>();
 
-    private Set<Category> category = new HashSet<>();
+
 
 
 

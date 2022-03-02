@@ -1,5 +1,6 @@
 package com.example.brendancode.demo;
 
+import com.amazonaws.services.secretsmanager.model.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -52,14 +53,6 @@ public class SakilaDbApplication {
 		languageRepository.save(addLanguage);
 		return save;
 	}
-
-//	@DeleteMapping("/removeLanguage")
-//	public @ResponseBody
-//	String removeLanguageByID(@PathVariable int language_id) {
-//
-//		languageRepository.deleteById(language_id);
-//		return "The language with ID " +language_id + " has been removed";
-//	}
 
 	@GetMapping("/Languages")
 	public @ResponseBody
@@ -163,6 +156,23 @@ public class SakilaDbApplication {
 		userReviewRepository.save(addReview);
 		return save;
 	}
+
+	@DeleteMapping("/review/delete/{user_review_id}")
+	public @ResponseBody
+	String deleteReviewByID(@PathVariable int user_review_id) {
+		userReviewRepository.deleteById(user_review_id);
+		return "deleted";
+	}
+
+	@PutMapping("/review/update/{user_review_id}")
+	public @ResponseBody
+	String updateActor(@PathVariable int user_review_id, @RequestParam String user_review) {
+		UserReview updateReview = userReviewRepository.findById(user_review_id).orElseThrow(() ->new ResourceNotFoundException("Review not found"));
+		updateReview.setUser_review(user_review);
+		final UserReview updatedReview = userReviewRepository.save(updateReview);
+		return "updated";
+	}
+
 
 	//*USER REVIEWS*//
 }

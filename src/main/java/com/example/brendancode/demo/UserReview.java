@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "userreview")
+@Table(name = "user_review")
 public class UserReview implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

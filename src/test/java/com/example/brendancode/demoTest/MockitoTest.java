@@ -90,15 +90,15 @@ public class MockitoTest {
         Assertions.assertEquals(Optional.of(testFilm), sakilaDbApplication.getFilmByID(0), "The film ID test has failed");
     }
 
-    @Test
-    public void testAddReview(){
-        UserReview addReview = new UserReview(1, "TestReview");
-        String expected = "save";
-        String actual = sakilaDbApplication.addReview(addReview.getFilm_film_id(), addReview.getUser_review());
-        ArgumentCaptor<UserReview>userReviewArgumentCaptor = ArgumentCaptor.forClass(UserReview.class);
-        verify(userReviewRepository).save(userReviewArgumentCaptor.capture());
-        userReviewArgumentCaptor.getValue();
-        Assertions.assertEquals(expected, actual,"UserReview data has been created in mock DB");
-    }
+//    @Test
+//    public void testAddReview(){
+//        UserReview addReview = new UserReview(1, "TestReview");
+//        String expected = "save";
+//        String actual = sakilaDbApplication.addReview(addReview.getFilm_film_id(), addReview.getUser_review());
+//        ArgumentCaptor<UserReview>userReviewArgumentCaptor = ArgumentCaptor.forClass(UserReview.class);
+//        verify(userReviewRepository).save(userReviewArgumentCaptor.capture());
+//        userReviewArgumentCaptor.getValue();
+//        Assertions.assertEquals(expected, actual,"UserReview data has been created in mock DB");
+//    }
 
 }
