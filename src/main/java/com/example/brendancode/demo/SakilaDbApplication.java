@@ -34,11 +34,13 @@ public class SakilaDbApplication {
 	public SakilaDbApplication(LanguageRepository languageRepository,
 							   ActorRepository actorRepository,
 							   FilmRepository filmRepository,
-							   CategoryRepository categoryRepository){
+							   CategoryRepository categoryRepository,
+							   UserReviewRepository userReviewRepository){
 		this.languageRepository = languageRepository;
 		this.actorRepository = actorRepository;
 		this.filmRepository = filmRepository;
 		this.categoryRepository = categoryRepository;
+		this.userReviewRepository = userReviewRepository;
 	}
 
 	public static void main(String[] args) {
