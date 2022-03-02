@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class CategoryTest {
+
     private Category category = new Category();
 
     @Test
@@ -17,7 +18,7 @@ public class CategoryTest {
 
     @Test
     public void testCategoryBy_id(){
-        assertEquals(0, category.getCategory_id(), "This test has failed");
+        assertEquals(1, category.getCategory_id(), "This test has failed");
     }
 
     @Test

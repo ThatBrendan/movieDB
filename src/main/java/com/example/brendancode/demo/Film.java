@@ -83,6 +83,10 @@ public class Film {
         return film_id;
     }
 
+    public void setFilm_id(int film_id) {
+        this.film_id = film_id;
+    }
+
     public String getTitle() {
         return title;
     }
@@ -127,9 +131,6 @@ public class Film {
         return category;
     }
 
-    public void setCategory(Set<Category> category) {
-        this.category = category;
-    }
 
     public Set<UserReview> getUserReview() {
         return userReview;

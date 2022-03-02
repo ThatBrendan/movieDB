@@ -12,14 +12,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 public class FilmTests {
-    public Film filmTest = new Film();
+   private Set<UserReviewTest> testUserReviewTest = new HashSet<>();
     private Set<Actor> testActorSet = new HashSet<>();
 
-    private Film film = new Film("Title", "Release year", "rating");
+    private Film film = new Film("Title", 1, "rating", "Description");
 
     @Test
     void setNameTest(){
-    Film testName = new Film("Title", "Release year", "rating");
+    Film testName = new Film("Title", 1, "rating", "Description");
     testName.setRating("PG");
     assertEquals( "PG", testName.getRating(), "Incorrect movie rating has been selected");
 
@@ -51,15 +51,32 @@ public class FilmTests {
 
     @Test
     public void test_constructor(){
-        Film film = new Film();
         assertTrue(film instanceof Film, "This is not a Film instance");
     }
 
     @Test
     public void test_getActor(){
         testActorSet.add(new Actor("Harry Potter","Johnny"));
-        filmTest.setActor(testActorSet);
-        assertEquals(testActorSet, filmTest.getActor(), "Get or Set Actor method isn't working");
+        film.setActor(testActorSet);
+        assertEquals(testActorSet, film.getActor(), "Get or Set Actor method isn't working");
     }
+
+    @Test
+    public void test_getFilm_id(){
+        assertEquals(0, film.getFilm_id(), "Set film id isnt working");
+    }
+
+    @Test
+    public void test_SetFilm_id(){
+        film.setFilm_id(1);
+        assertEquals(1, film.getFilm_id(), "Set film id isnt working");
+    }
+
+    @Test
+    public void test_SetDescription() {
+        film.setDescription("A movie about spiders");
+        assertEquals("A movie about spiders",film.getDescription(), "Set description isnt working");
+    }
+
 
 }
