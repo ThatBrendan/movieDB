@@ -101,4 +101,11 @@ public class MockitoTest {
         Assertions.assertEquals(expected, actual,"UserReview data has been created in mock DB");
     }
 
+    @Test
+    public void testGetCategoryBy_ID(){
+        Category testCategory = new Category("TestCategory");
+        when(sakilaDbApplication.getCategoryByID(1)).thenReturn(Optional.of(testCategory));
+        Assertions.assertEquals(Optional.of(testCategory), sakilaDbApplication.getCategoryByID(1), "The category ID test has failed");
+    }
+
 }
