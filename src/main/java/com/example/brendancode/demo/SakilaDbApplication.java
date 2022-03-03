@@ -168,7 +168,7 @@ public class SakilaDbApplication {
 
 	@PutMapping("/review/update/{user_review_id}")
 	public @ResponseBody
-	String updateActor(@PathVariable int user_review_id, @RequestParam String user_review) {
+	String updateReview(@PathVariable int user_review_id, @RequestParam String user_review) {
 		UserReview updateReview = userReviewRepository.findById(user_review_id).orElseThrow(() ->new ResourceNotFoundException("Review not found"));
 		updateReview.setUser_review(user_review);
 		final UserReview updatedReview = userReviewRepository.save(updateReview);
