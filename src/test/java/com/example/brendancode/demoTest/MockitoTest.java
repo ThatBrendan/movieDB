@@ -112,6 +112,16 @@ public class MockitoTest {
     }
 
     @Test
+    public void test_GetAllCategories(){
+        Category testCategories = new Category("TestCategory");
+        List<Category> categoryList = new ArrayList<>();
+        categoryList.add(testCategories);
+
+        when(sakilaDbApplication.getAllCategory()).thenReturn(categoryList);
+        Assertions.assertEquals(categoryList, sakilaDbApplication.getAllCategory(), "Category data was not added to mock DB");
+    }
+
+    @Test
     public void test_GetAllReviews(){
         UserReview testAllReviews = new UserReview(1, "TestReview");
         List<UserReview> userReviewList = new ArrayList<>();
