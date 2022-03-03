@@ -49,10 +49,14 @@ public class MockitoTest {
     }
 
     @Test
-    public void testGetLanguageBy_id(){
-        Language testLanguage = new Language("TestLanguage");
-        when(sakilaDbApplication.getLanguageByID(0)).thenReturn(Optional.of(testLanguage));
-        Assertions.assertEquals(Optional.of(testLanguage), sakilaDbApplication.getLanguageByID(0), "The Language ID test has failed");
+    public void testAddFilm(){
+        Film addFilm = new Film("Title", "Release year", "rating");
+        String expected = "save";
+        String actual = sakilaDbApplication.addNewFilm(addFilm.getTitle(), addFilm.getRelease_year(), addFilm.getRating(), addFilm.getDescription());
+        ArgumentCaptor<Film>filmArgumentCaptor = ArgumentCaptor.forClass(Film.class);
+        verify(filmRepository).save(filmArgumentCaptor.capture());
+        filmArgumentCaptor.getValue();
+        Assertions.assertEquals(expected, actual,"Film data has been created in mock DB");
     }
 
     @Test
@@ -67,31 +71,6 @@ public class MockitoTest {
     }
 
     @Test
-    public void testGetActorBy_id(){
-        Actor testActor = new Actor("TestFirstName", "TestLastName", 1);
-        when(sakilaDbApplication.getActorByID(0)).thenReturn(Optional.of(testActor));
-        Assertions.assertEquals(Optional.of(testActor), sakilaDbApplication.getActorByID(0), "The Actor ID test has failed");
-    }
-
-    @Test
-    public void testAddFilm(){
-        Film addFilm = new Film("Title", "Release year", "rating");
-        String expected = "save";
-        String actual = sakilaDbApplication.addNewFilm(addFilm.getTitle(), addFilm.getRelease_year(), addFilm.getRating(), addFilm.getDescription());
-        ArgumentCaptor<Film>filmArgumentCaptor = ArgumentCaptor.forClass(Film.class);
-        verify(filmRepository).save(filmArgumentCaptor.capture());
-        filmArgumentCaptor.getValue();
-        Assertions.assertEquals(expected, actual,"Film data has been created in mock DB");
-    }
-
-    @Test
-    public void testGetFilmBy_id(){
-        Film testFilm = new Film("TestFilm", 2000, "TestRating", 1, "TestDescription");
-        when(sakilaDbApplication.getFilmByID(0)).thenReturn(Optional.of(testFilm));
-        Assertions.assertEquals(Optional.of(testFilm), sakilaDbApplication.getFilmByID(0), "The film ID test has failed");
-    }
-
-    @Test
     public void testAddReview(){
         UserReview addReview = new UserReview(1, "TestReview");
         String expected = "save";
@@ -100,6 +79,67 @@ public class MockitoTest {
         verify(userReviewRepository).save(userReviewArgumentCaptor.capture());
         userReviewArgumentCaptor.getValue();
         Assertions.assertEquals(expected, actual,"UserReview data has been created in mock DB");
+    }
+
+    @Test
+    public void test_GetAllLanguages(){
+        Language testLang = new Language("German");
+        List<Language> languageList = new ArrayList<>();
+        languageList.add(testLang);
+
+        when(sakilaDbApplication.getAllLanguages()).thenReturn(languageList);
+        Assertions.assertEquals(languageList, sakilaDbApplication.getAllLanguages(), "Language data was not added to mock DB");
+    }
+
+    @Test
+    public void test_GetAllFilms(){
+        Film testFilming = new Film("TestFilm", 2000,"TestRating", 1, "TestDescription");
+        List<Film> filmList = new ArrayList<>();
+        filmList.add(testFilming);
+
+        when(sakilaDbApplication.getAllFilms()).thenReturn(filmList);
+        Assertions.assertEquals(filmList, sakilaDbApplication.getAllFilms(), "Film data was not added to the mock DB");
+    }
+
+    @Test
+    public void test_GetAllActors(){
+        Actor testActorCast = new Actor("TestFirstName", "TestLastName", 1);
+        List<Actor> actorList = new ArrayList<>();
+        actorList.add(testActorCast);
+
+        when(sakilaDbApplication.getAllActors()).thenReturn(actorList);
+        Assertions.assertEquals(actorList, sakilaDbApplication.getAllActors(), "Actor data was not added to the mock DB");
+    }
+
+    @Test
+    public void test_GetAllReviews(){
+        UserReview testAllReviews = new UserReview(1, "TestReview");
+        List<UserReview> userReviewList = new ArrayList<>();
+        userReviewList.add(testAllReviews);
+
+        when(sakilaDbApplication.getAllReviews()).thenReturn(userReviewList);
+        Assertions.assertEquals(userReviewList, sakilaDbApplication.getAllReviews(), "Review data was not added to the mock DB");
+    }
+
+    @Test
+    public void testGetLanguageBy_id(){
+        Language testLanguage = new Language("TestLanguage");
+        when(sakilaDbApplication.getLanguageByID(0)).thenReturn(Optional.of(testLanguage));
+        Assertions.assertEquals(Optional.of(testLanguage), sakilaDbApplication.getLanguageByID(0), "The Language ID test has failed");
+    }
+
+    @Test
+    public void testGetActorBy_id(){
+        Actor testActor = new Actor("TestFirstName", "TestLastName", 1);
+        when(sakilaDbApplication.getActorByID(0)).thenReturn(Optional.of(testActor));
+        Assertions.assertEquals(Optional.of(testActor), sakilaDbApplication.getActorByID(0), "The Actor ID test has failed");
+    }
+
+    @Test
+    public void testGetFilmBy_id(){
+        Film testFilm = new Film("TestFilm", 2000, "TestRating", 1, "TestDescription");
+        when(sakilaDbApplication.getFilmByID(0)).thenReturn(Optional.of(testFilm));
+        Assertions.assertEquals(Optional.of(testFilm), sakilaDbApplication.getFilmByID(0), "The film ID test has failed");
     }
 
     @Test
