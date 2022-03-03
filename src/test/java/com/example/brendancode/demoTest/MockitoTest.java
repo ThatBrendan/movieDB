@@ -71,6 +71,26 @@ public class MockitoTest {
     }
 
     @Test
+    public void testAddCategory(){
+        Category addCategory = new Category("TestAddCategory");
+        String expected = "save";
+        String actual = sakilaDbApplication.addCategory(addCategory.getName());
+        ArgumentCaptor<Category>categoryArgumentCaptor = ArgumentCaptor.forClass(Category.class);
+        verify(categoryRepository).save(categoryArgumentCaptor.capture());
+        categoryArgumentCaptor.getValue();
+        Assertions.assertEquals(expected, actual, "Category data has been created in mock DB");
+    }
+
+    @Test
+    public void testGetCategory(){
+        Category testCategory = new Category("Name");
+        List<Category> categoryList = new ArrayList<>();
+        categoryList.add(testCategory);
+        when(sakilaDbApplication.getAllCategory()).thenReturn(categoryList);
+        Assertions.assertEquals(categoryList, sakilaDbApplication.getAllCategory(), "This category failed");
+    }
+
+    @Test
     public void testAddReview(){
         UserReview addReview = new UserReview(1, "TestReview");
         String expected = "save";
@@ -159,13 +179,6 @@ public class MockitoTest {
         Assertions.assertEquals(Optional.of(testCategory), sakilaDbApplication.getCategoryByID(1), "The category ID test has failed");
     }
 
-    @Test
-    public void testGetCategory(){
-        Category testCategory = new Category("Name");
-        List<Category> categoryList = new ArrayList<>();
-        categoryList.add(testCategory);
-        when(sakilaDbApplication.getAllCategory()).thenReturn(categoryList);
-        Assertions.assertEquals(categoryList, sakilaDbApplication.getAllCategory(), "This category failed");
-    }
+
 
 }
