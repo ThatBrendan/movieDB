@@ -32,7 +32,7 @@ public class MockitoTest {
     private UserReviewRepository userReviewRepository;
     private Object Film;
 
-    @BeforeEach
+    @BeforeEach // Setting up an instance of our DB without data in it.
     void Setup(){
         sakilaDbApplication = new SakilaDbApplication(languageRepository, actorRepository, filmRepository, categoryRepository, userReviewRepository);
     }
@@ -42,10 +42,10 @@ public class MockitoTest {
         Language saveLanguage = new Language("Test Language");
         String expected = "save";
         String actual = sakilaDbApplication.addLanguage(saveLanguage.getName());
-        ArgumentCaptor<Language>languageArgumentCaptor = ArgumentCaptor.forClass(Language.class);
+        ArgumentCaptor<Language>languageArgumentCaptor = ArgumentCaptor.forClass(Language.class); // holds data for the test language and verifies that repo has saved instance.
         verify(languageRepository).save(languageArgumentCaptor.capture());
         languageArgumentCaptor.getValue();
-        Assertions.assertEquals(expected, actual, "Data has been created in mock DB");
+        Assertions.assertEquals(expected, actual, "Data has not been created in mock DB");
     }
 
     @Test
@@ -56,7 +56,7 @@ public class MockitoTest {
         ArgumentCaptor<Film>filmArgumentCaptor = ArgumentCaptor.forClass(Film.class);
         verify(filmRepository).save(filmArgumentCaptor.capture());
         filmArgumentCaptor.getValue();
-        Assertions.assertEquals(expected, actual,"Film data has been created in mock DB");
+        Assertions.assertEquals(expected, actual,"Film data has not been created in mock DB");
     }
 
     @Test
@@ -67,7 +67,7 @@ public class MockitoTest {
         ArgumentCaptor<Actor>actorArgumentCaptor = ArgumentCaptor.forClass(Actor.class);
         verify(actorRepository).save(actorArgumentCaptor.capture());
         actorArgumentCaptor.getValue();
-        Assertions.assertEquals(expected, actual,"Actor data has been created in mock DB");
+        Assertions.assertEquals(expected, actual,"Actor data has not been created in mock DB");
     }
 
     @Test
@@ -78,7 +78,7 @@ public class MockitoTest {
         ArgumentCaptor<Category>categoryArgumentCaptor = ArgumentCaptor.forClass(Category.class);
         verify(categoryRepository).save(categoryArgumentCaptor.capture());
         categoryArgumentCaptor.getValue();
-        Assertions.assertEquals(expected, actual, "Category data has been created in mock DB");
+        Assertions.assertEquals(expected, actual, "Category data has not been created in mock DB");
     }
 
     @Test
@@ -98,7 +98,7 @@ public class MockitoTest {
         ArgumentCaptor<UserReview>userReviewArgumentCaptor = ArgumentCaptor.forClass(UserReview.class);
         verify(userReviewRepository).save(userReviewArgumentCaptor.capture());
         userReviewArgumentCaptor.getValue();
-        Assertions.assertEquals(expected, actual,"UserReview data has been created in mock DB");
+        Assertions.assertEquals(expected, actual,"UserReview data has not been created in mock DB");
     }
 
     @Test
